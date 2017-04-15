@@ -1,14 +1,14 @@
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
 import re
-from amazonCrawl.items import AmazonURLs
+from amazonCrawl.items import AmazonItem
 from scrapy import signals
 from tqdm import tqdm
 
 class ItemSpider(Spider):
-    name = "url"
+    name = "item"
     allowed_domains = ["amazon.com"]
-    start_urls = ['https://www.amazon.com/gp/goldbox/ref=gbps_ftr_s-3_596a_page_2?gb_f_GB-SUPPLE=page:1']
+    start_urls = ['https://www.amazon.com/dp/B01EV2094Y']
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
@@ -36,10 +36,18 @@ class ItemSpider(Spider):
         @scrapes name
         """
         self.pbar.update()
-        sel = Selector(response)
+        regexp = re.compile("dp\/(.*)$")
         items = []
-        item = AmazonURLs()
-        item['url'] = sel.xpath('//*[@class="a-link-normal"]/text()').extract()
+        sel = Selector(response)
+        item = AmazonItem()
+        item['title'] = sel.xpath('//*[@id="productTitle"]/text()').extract()
+        item['discountPrice'] = sel.xpath('//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()').extract()
+        item['originPrice'] = sel.xpath('//*[@class="a-text-strike"]/text()').extract()
+        item['category'] = sel.xpath('//a[@class="a-link-normal a-color-tertiary"]//text()').extract()
+        item['url'] = response.url 
+        item['id'] = regexp.search(response.url).group(1)
+        item['rating'] = sel.xpath('//*[@class="arp-rating-out-of-text"]//text()').extract()
+        item['image'] = sel.xpath('//*[@id="landingImage"]/@src').extract()
 
         items.append(item)
 
