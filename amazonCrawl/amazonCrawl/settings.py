@@ -14,6 +14,5 @@ BOT_NAME = 'amazonCrawl'
 SPIDER_MODULES = ['amazonCrawl.spiders']
 NEWSPIDER_MODULE = 'amazonCrawl.spiders'
 
-
-FEED_URI = u'file:///D:\CarlHack2017\item.csv'
-FEED_FORMAT = 'CSV'
+FEED_URI = u'output.json'
+FEED_FORMAT = 'Json'
