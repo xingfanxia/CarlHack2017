@@ -5,10 +5,18 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy import Item, Field
 
 
-class AmazoncrawlItem(scrapy.Item):
+class AmazonItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    title = Field()
+    originPrice = Field()
+    discountPrice = Field()
+    category = Field()
+    id = Field()
+    url = Field()
+    rating = Field()
+    image = Field()
+    subcategory = Field()

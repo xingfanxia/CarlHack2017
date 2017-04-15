@@ -22,7 +22,6 @@ def AmzonParser(url):
 			RAW_CATEGORY = doc.xpath(XPATH_CATEGORY)
 			RAW_ORIGINAL_PRICE = doc.xpath(XPATH_ORIGINAL_PRICE)
 			RAw_AVAILABILITY = doc.xpath(XPATH_AVAILABILITY)
-
 			NAME = ' '.join(''.join(RAW_NAME).split()) if RAW_NAME else None
 			SALE_PRICE = ' '.join(''.join(RAW_SALE_PRICE).split()).strip() if RAW_SALE_PRICE else None
 			CATEGORY = ' > '.join([i.strip() for i in RAW_CATEGORY]) if RAW_CATEGORY else None
