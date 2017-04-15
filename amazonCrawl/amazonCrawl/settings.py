@@ -14,7 +14,7 @@ BOT_NAME = 'amazonCrawl'
 SPIDER_MODULES = ['amazonCrawl.spiders']
 NEWSPIDER_MODULE = 'amazonCrawl.spiders'
 
-FEED_URI = u'output2.json'
+FEED_URI = u'ItemDetail.json'
 FEED_FORMAT = 'Json'
 # ITEM_PIPELINES = {
 #     'amazonCrawl.pipelines.AmazoncrawlPipeline': 300,

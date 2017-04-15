@@ -1,6 +1,6 @@
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
-import re
+import re, amazonCrawl.gen2
 from amazonCrawl.items import AmazonItem
 from scrapy import signals
 from tqdm import tqdm
@@ -8,7 +8,7 @@ from tqdm import tqdm
 class ItemSpider(Spider):
     name = "item"
     allowed_domains = ["amazon.com"]
-    start_urls = ['https://www.amazon.com/dp/B01EV2094Y']
+    start_urls = amazonCrawl.gen2.retriveLS()
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):
