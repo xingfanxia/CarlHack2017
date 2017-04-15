@@ -29,7 +29,7 @@ class ItemSpider(Spider):
         item['category'] = sel.xpath('//a[@class="a-link-normal a-color-tertiary"]//text()').extract()
         item['url'] = response.url 
         item['id'] = regexp.search(response.url).group(1)
-        # item['rating'] = sel.xpath('text()').re('-\s[^\n]*\\r')
+        item['rating'] = sel.xpath('//*[@class="arp-rating-out-of-text"]//text()').extract()
         item['image'] = sel.xpath('//*[@id="landingImage"]/@src').extract()
 
         items.append(item)
