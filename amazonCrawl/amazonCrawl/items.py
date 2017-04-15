@@ -20,3 +20,6 @@ class AmazonItem(Item):
     rating = Field()
     image = Field()
     subcategory = Field()
+
+class AmazonURLs(Item):
+    url = Field()
