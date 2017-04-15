@@ -10,7 +10,7 @@ class AmazoncrawlPipeline(object):
     def process_item(self, item, spider):
         item['title'] = ' '.join(''.join(item['title']).split()) if item['title'] else None
         item['discountPrice'] = ' '.join(''.join(item['discountPrice']).split()).strip()[1:] if item['discountPrice'] else None
-        item['rating'] = item['rating'][0][:4]
+        item['rating'] = item['rating'][0][:4] if item['rating'] else None
         item['originPrice'] = ' '.join(''.join(item['originPrice']).split()).strip()[1:] if item['originPrice'] else None
         item['category'] = ' > '.join([i.strip() for i in item['category']]) if item['category'] else None
         return item
