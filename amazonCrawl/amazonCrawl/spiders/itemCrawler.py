@@ -29,7 +29,7 @@ class ItemSpider(Spider):
         # item['id'] = sel.xpath('text()').re('-\s[^\n]*\\r')
         # item['url'] = sel.xpath('text()').re('-\s[^\n]*\\r')
         # item['rating'] = sel.xpath('text()').re('-\s[^\n]*\\r')
-        item['image'] = sel.xpath('//*[@id="//*[@class="a-text-strike"]/src')
+        item['image'] = sel.xpath('//*[@id="landingImage"]/@src')
 
         items.append(item)
 
