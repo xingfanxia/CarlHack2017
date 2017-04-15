@@ -1,3 +1,6 @@
-*.pyc
-*.class
+**/.DS_Store
+/build/
+**/*.class
+/.idea/workspace.xml
 .DS_Store
+build/*
