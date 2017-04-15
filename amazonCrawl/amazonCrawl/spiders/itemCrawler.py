@@ -23,14 +23,13 @@ class ItemSpider(Spider):
         sel = Selector(response)
         item = AmazonItem()
         item['title'] = sel.xpath('//*[@id="productTitle"]/text()').extract()
-        item['originPrice'] = sel.xpath('//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()').extract()
-        item['discountPrice'] = sel.xpath('//td[contains(text(),"List Price") or contains(text(),"M.R.P") or contains(text(),"Price")]/following-sibling::td/text()').extract()
+        item['discountPrice'] = sel.xpath('//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()').extract()
+        item['originPrice'] = sel.xpath('//*[@class="a-text-strike"]/text()').extract()
         item['category'] = sel.xpath('//a[@class="a-link-normal a-color-tertiary"]//text()').extract()
         # item['id'] = sel.xpath('text()').re('-\s[^\n]*\\r')
         # item['url'] = sel.xpath('text()').re('-\s[^\n]*\\r')
         # item['rating'] = sel.xpath('text()').re('-\s[^\n]*\\r')
-        # item['image'] = sel.xpath('text()').re('-\s[^\n]*\\r')
-        # item['subcategory'] = sel.xpath('text()').re('-\s[^\n]*\\r')
+        item['image'] = sel.xpath('//*[@id="//*[@class="a-text-strike"]/src')
 
         items.append(item)
 
