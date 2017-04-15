@@ -39,7 +39,7 @@ class ItemSpider(Spider):
         sel = Selector(response)
         items = []
         item = AmazonURLs()
-        item['url'] = (sel.xpath('//*[@class="a-link-normal"]/text()').extract())
+        item['url'] = sel.xpath('//*[@class="a-link-normal"]/text()').extract()
 
         items.append(item)
 
