@@ -1,6 +1,6 @@
 from scrapy.spiders import Spider
 from scrapy.selector import Selector
-
+import re
 from amazonCrawl.items import AmazonItem
 
 
@@ -19,6 +19,7 @@ class ItemSpider(Spider):
         @url http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/
         @scrapes name
         """
+        regexp = re.compile("dp\/(.*)$")
         items = []
         sel = Selector(response)
         item = AmazonItem()
@@ -26,9 +27,9 @@ class ItemSpider(Spider):
         item['discountPrice'] = sel.xpath('//span[contains(@id,"ourprice") or contains(@id,"saleprice")]/text()').extract()
         item['originPrice'] = sel.xpath('//*[@class="a-text-strike"]/text()').extract()
         item['category'] = sel.xpath('//a[@class="a-link-normal a-color-tertiary"]//text()').extract()
-        # item['id'] = sel.xpath('text()').re('-\s[^\n]*\\r')
-        # item['url'] = sel.xpath('text()').re('-\s[^\n]*\\r')
-        # item['rating'] = sel.xpath('text()').re('-\s[^\n]*\\r')
+        item['url'] = response.url 
+        item['id'] = regexp.search(response.url).group(1)
+        item['rating'] = sel.xpath('//*[@class="arp-rating-out-of-text"]//text()').extract()
         item['image'] = sel.xpath('//*[@id="landingImage"]/@src').extract()
 
         items.append(item)
